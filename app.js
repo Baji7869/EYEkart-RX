@@ -65,7 +65,6 @@ function handleFormSubmit(e) {
 
   savePatient(p);
   generateReport(p);
-  alert("✅ Report generated successfully!");
 }
 
 // -------------------- Validation --------------------
@@ -76,11 +75,9 @@ function validateForm() {
   const odAxis = document.getElementById("odAxis").value;
   const osAxis = document.getElementById("osAxis").value;
 
-  if (!name) return alert("Please enter patient name");
-  if (!dob) return alert("Please enter date of birth");
-  if (!rxDate) return alert("Please enter Rx date");
-  if (odAxis && (odAxis < 0 || odAxis > 180)) return alert("OD Axis must be between 0 and 180");
-  if (osAxis && (osAxis < 0 || osAxis > 180)) return alert("OS Axis must be between 0 and 180");
+  if (!name || !dob || !rxDate) return false;
+  if (odAxis && (odAxis < 0 || odAxis > 180)) return false;
+  if (osAxis && (osAxis < 0 || osAxis > 180)) return false;
   return true;
 }
 
@@ -144,17 +141,13 @@ function printReport() {
   window.print();
 }
 
-// ✅ FINAL FIXED PDF DOWNLOAD FUNCTION
+// ✅ PDF DOWNLOAD (No popup)
 async function downloadPDF() {
   try {
     const element = document.getElementById("reportContent");
-    if (!element) {
-      alert("⚠️ Report content not found!");
-      return;
-    }
+    if (!element) return;
 
-    // Delay to ensure logo + fonts fully render
-    await new Promise((r) => setTimeout(r, 800));
+    await new Promise((r) => setTimeout(r, 600));
 
     const name = document.getElementById("reportPatientName").textContent || "Patient";
     const date = document.getElementById("reportRxDate").textContent || "Report";
@@ -162,7 +155,6 @@ async function downloadPDF() {
     const cleanDate = date.replace(/[^0-9A-Za-z]/g, "_");
     const filename = `EYEkart_${cleanName}_${cleanDate}.pdf`;
 
-    // Convert external logo to base64 (fixes CORS issues)
     const logo = document.querySelector(".report-logo-small");
     if (logo && logo.src.startsWith("http")) {
       const blob = await fetch(logo.src).then((res) => res.blob());
@@ -176,7 +168,7 @@ async function downloadPDF() {
 
     const opt = {
       margin: 0.4,
-      filename: filename,
+      filename,
       image: { type: "jpeg", quality: 1 },
       html2canvas: {
         scale: 2,
@@ -190,10 +182,8 @@ async function downloadPDF() {
     };
 
     await html2pdf().set(opt).from(element).save();
-    alert("✅ PDF downloaded successfully!");
   } catch (err) {
     console.error("PDF generation error:", err);
-    alert("⚠️ Failed to generate PDF. Check console for details.");
   }
 }
 
@@ -245,13 +235,9 @@ function loadPatient(id) {
   document.getElementById("osAxis").value = p.os.axis;
   document.getElementById("osAdd").value = p.os.add;
   document.getElementById("osPd").value = p.os.pd;
-
-  alert(`✅ Loaded patient: ${p.name}`);
 }
 
 function deletePatient(id) {
-  if (!confirm("Are you sure you want to delete this record?")) return;
   patients = patients.filter((p) => p.id !== id);
   renderPatientHistory();
-  alert("🗑️ Patient deleted successfully!");
 }
