@@ -1,9 +1,9 @@
 function generate() {
 
-    const nameInput = document.getElementById("name").value;
+    const name = document.getElementById("name").value;
     const rawDate = document.getElementById("date").value;
 
-    document.getElementById("pName").innerText = nameInput || "---";
+    document.getElementById("pName").innerText = name || "---";
 
     if (rawDate) {
         const d = new Date(rawDate);
@@ -14,8 +14,6 @@ function generate() {
                 month: "short",
                 year: "numeric"
             });
-    } else {
-        document.getElementById("pDate").innerText = "---";
     }
 
     document.getElementById("prSphere").innerText =
@@ -47,7 +45,25 @@ function generate() {
 }
 
 
-function downloadPDF() {
+async function downloadPDF() {
+
+    const element = document.getElementById("prescription");
+
+    const canvas = await html2canvas(element, {
+        scale: 3,
+        useCORS: true
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF("p", "mm", "a4");
+
+    const imgWidth = 190;
+    const pageHeight = 297;
+    const imgHeight = canvas.height * imgWidth / canvas.width;
+
+    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
 
     const name =
         document.getElementById("pName").innerText.replace(/\s+/g, "_");
@@ -55,7 +71,5 @@ function downloadPDF() {
     const date =
         document.getElementById("pDate").innerText.replace(/[\s,]+/g, "_");
 
-    document.title = `${name}_${date}`;
-
-    window.print();
+    pdf.save(`${name}_${date}.pdf`);
 }
