@@ -48,6 +48,8 @@ function generate() {
 
 function downloadPDF() {
 
+    const element = document.getElementById("prescription");
+
     const name =
         document.getElementById("pName").innerText.replace(/\s+/g, "_");
 
@@ -56,5 +58,13 @@ function downloadPDF() {
 
     const filename = `${name}_${date}.pdf`;
 
-    html2pdf().from(document.getElementById("prescription")).save(filename);
+    const opt = {
+        margin: 0.5,
+        filename: filename,
+        image: { type: 'jpeg', quality: 1 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(element).save();
 }
