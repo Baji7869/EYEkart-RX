@@ -42,6 +42,13 @@ function generate() {
 
     document.getElementById("pTestedBy").innerText =
         document.getElementById("testedBy").value;
+
+    document.getElementById("prAdd").innerText =
+    document.getElementById("rAdd").value;
+
+document.getElementById("plAdd").innerText =
+    document.getElementById("lAdd").value;
+
 }
 
 
