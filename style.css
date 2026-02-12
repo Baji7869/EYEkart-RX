@@ -39,14 +39,22 @@ body {
     padding: 10px;
     border: none;
     width: 100%;
-    cursor: pointer;
 }
 
 .report {
     background: white;
     color: black;
-    padding: 20px;
+    padding: 25px;
     border-radius: 8px;
+}
+
+.brand-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.brand-header h2 {
+    color: #1d1d6b;
 }
 
 .name-row {
@@ -56,13 +64,9 @@ body {
 }
 
 .name {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     color: #1d1d6b;
-}
-
-.date {
-    font-size: 16px;
 }
 
 table {
@@ -100,9 +104,4 @@ td:first-child {
     color: white;
     border: none;
     cursor: pointer;
-}
-
-.footer {
-    text-align: center;
-    margin-top: 25px;
 }
