@@ -54,17 +54,17 @@ document.getElementById("plAdd").innerText =
 
 async function downloadPDF() {
 
-    // small delay ensures DOM updates
-    await new Promise(resolve => setTimeout(resolve, 200));
+    await new Promise(resolve => setTimeout(resolve, 100));
 
     const element = document.getElementById("prescription");
 
     const canvas = await html2canvas(element, {
-        scale: 3,
+        scale: 1.5,          // reduced scale
         useCORS: true
     });
 
-    const imgData = canvas.toDataURL("image/png");
+    // Convert to JPEG with compression
+    const imgData = canvas.toDataURL("image/jpeg", 0.7);
 
     const { jsPDF } = window.jspdf;
     const pdf = new jsPDF("p", "mm", "a4");
@@ -72,7 +72,7 @@ async function downloadPDF() {
     const imgWidth = 190;
     const imgHeight = canvas.height * imgWidth / canvas.width;
 
-    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+    pdf.addImage(imgData, "JPEG", 10, 10, imgWidth, imgHeight);
 
     const name =
         document.getElementById("pName").innerText.replace(/\s+/g, "_");
@@ -82,4 +82,3 @@ async function downloadPDF() {
 
     pdf.save(`${name}_${date}.pdf`);
 }
-
