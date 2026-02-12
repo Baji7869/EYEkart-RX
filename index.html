@@ -20,6 +20,9 @@
         <input id="lAxis" placeholder="Left Axis">
         <input id="rPd" placeholder="Right PD">
         <input id="lPd" placeholder="Left PD">
+        <input id="rAdd" placeholder="Right Add Power">
+        <input id="lAdd" placeholder="Left Add Power">
+
         <input id="testedBy" placeholder="Tested By">
 
         <button onclick="generate()">Generate</button>
@@ -69,9 +72,10 @@
                 </tr>
                 <tr>
                     <td class="left-col">Add. Power</td>
-                    <td>--</td>
-                    <td>--</td>
+                    <td id="prAdd"></td>
+                    <td id="plAdd"></td>
                 </tr>
+
             </tbody>
         </table>
 
