@@ -54,6 +54,9 @@ document.getElementById("plAdd").innerText =
 
 async function downloadPDF() {
 
+    // small delay ensures DOM updates
+    await new Promise(resolve => setTimeout(resolve, 200));
+
     const element = document.getElementById("prescription");
 
     const canvas = await html2canvas(element, {
@@ -67,7 +70,6 @@ async function downloadPDF() {
     const pdf = new jsPDF("p", "mm", "a4");
 
     const imgWidth = 190;
-    const pageHeight = 297;
     const imgHeight = canvas.height * imgWidth / canvas.width;
 
     pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
@@ -80,3 +82,4 @@ async function downloadPDF() {
 
     pdf.save(`${name}_${date}.pdf`);
 }
+
