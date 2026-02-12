@@ -1,48 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Sarkar Eye Camps and Optics</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Sarkar Eye Camps and Optics</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="page">
+<div class="container">
 
-    <div class="top-title">Eye Test Prescription</div>
-
-    <!-- FORM -->
-    <div class="form-box">
+    <div class="form-section">
         <input id="name" placeholder="Patient Name">
         <input id="date" type="date">
-
-        <input id="rSphere" placeholder="Right Eye Sphere">
-        <input id="lSphere" placeholder="Left Eye Sphere">
-
-        <input id="rCyl" placeholder="Right Eye Cylinder">
-        <input id="lCyl" placeholder="Left Eye Cylinder">
-
-        <input id="rAxis" placeholder="Right Eye Axis">
-        <input id="lAxis" placeholder="Left Eye Axis">
-
-        <input id="rPd" placeholder="Right Eye PD">
-        <input id="lPd" placeholder="Left Eye PD">
-
+        <input id="rSphere" placeholder="Right Sphere">
+        <input id="lSphere" placeholder="Left Sphere">
+        <input id="rCyl" placeholder="Right Cylinder">
+        <input id="lCyl" placeholder="Left Cylinder">
+        <input id="rAxis" placeholder="Right Axis">
+        <input id="lAxis" placeholder="Left Axis">
+        <input id="rPd" placeholder="Right PD">
+        <input id="lPd" placeholder="Left PD">
         <input id="testedBy" placeholder="Tested By">
 
-        <button onclick="generate()">Generate Prescription</button>
+        <button onclick="generate()">Generate</button>
+        <button onclick="downloadPDF()">Download PDF</button>
     </div>
 
-    <!-- REPORT -->
-    <div class="report" id="prescription">
+    <!-- PRESCRIPTION CARD -->
+    <div class="card" id="prescription">
 
-        <div class="brand-header">
+        <div class="card-header">
             <h2>Sarkar Eye Camps and Optics</h2>
         </div>
 
         <div class="name-row">
-            <div class="name" id="pName">---</div>
-            <div class="date" id="pDate">---</div>
+            <h1 id="pName">---</h1>
+            <div id="pDate">---</div>
         </div>
 
         <table>
@@ -55,27 +48,27 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Spherical</td>
+                    <td class="left-col">Spherical</td>
                     <td id="prSphere"></td>
                     <td id="plSphere"></td>
                 </tr>
                 <tr>
-                    <td>Cylindrical</td>
+                    <td class="left-col">Cylindrical</td>
                     <td id="prCyl"></td>
                     <td id="plCyl"></td>
                 </tr>
                 <tr>
-                    <td>Axis</td>
+                    <td class="left-col">Axis</td>
                     <td id="prAxis"></td>
                     <td id="plAxis"></td>
                 </tr>
                 <tr>
-                    <td>Pupil Distance</td>
+                    <td class="left-col">Pupil Distance</td>
                     <td id="prPd"></td>
                     <td id="plPd"></td>
                 </tr>
                 <tr>
-                    <td>Add. Power</td>
+                    <td class="left-col">Add. Power</td>
                     <td>--</td>
                     <td>--</td>
                 </tr>
@@ -85,12 +78,11 @@
         <div class="tested">
             Tested by <strong id="pTestedBy"></strong>
         </div>
+
     </div>
-
-    <button class="download" onclick="downloadPDF()">Download Report</button>
-
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="app.js"></script>
 
