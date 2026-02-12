@@ -48,7 +48,20 @@ function generate() {
 
 function downloadPDF() {
 
-    const element = document.getElementById("prescription");
+    const original = document.getElementById("prescription");
+
+    // Clone the report
+    const clone = original.cloneNode(true);
+
+    // Force white background
+    clone.style.background = "white";
+    clone.style.color = "black";
+    clone.style.padding = "20px";
+
+    // Add to body temporarily
+    clone.style.position = "absolute";
+    clone.style.left = "-9999px";
+    document.body.appendChild(clone);
 
     const name =
         document.getElementById("pName").innerText.replace(/\s+/g, "_");
@@ -62,9 +75,12 @@ function downloadPDF() {
         margin: 0.5,
         filename: filename,
         image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 2, useCORS: true },
+        html2canvas: { scale: 3 },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
-    html2pdf().set(opt).from(element).save();
+    html2pdf().set(opt).from(clone).save().then(() => {
+        document.body.removeChild(clone);
+    });
 }
+
