@@ -105,3 +105,23 @@ td:first-child {
     border: none;
     cursor: pointer;
 }
+
+@media print {
+
+    body {
+        background: white !important;
+        padding: 0;
+    }
+
+    .form-box,
+    .download {
+        display: none !important;
+    }
+
+    .report {
+        box-shadow: none;
+        border-radius: 0;
+        width: 100%;
+    }
+
+}
