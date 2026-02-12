@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Eye Test Prescription | EYEkart</title>
+    <title>Sarkar Eye Camps and Optics</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,8 +14,6 @@
     <!-- FORM -->
     <div class="form-box">
         <input id="name" placeholder="Patient Name">
-
-        <!-- Calendar Picker -->
         <input id="date" type="date">
 
         <input id="rSphere" placeholder="Right Eye Sphere">
@@ -37,6 +35,10 @@
 
     <!-- REPORT -->
     <div class="report" id="prescription">
+
+        <div class="brand-header">
+            <h2>Sarkar Eye Camps and Optics</h2>
+        </div>
 
         <div class="name-row">
             <div class="name" id="pName">---</div>
@@ -87,17 +89,9 @@
 
     <button class="download" onclick="downloadPDF()">Download Report</button>
 
-    <div class="footer">
-        <h2>EYEkart</h2>
-        <p>Trusted Eye Care</p>
-    </div>
-
 </div>
 
-<!-- PDF Library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-
-<!-- YOUR JS FILE -->
 <script src="app.js"></script>
 
 </body>
